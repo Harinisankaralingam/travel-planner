@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TravelPlanner Pro</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins,sans-serif}
+body{background:#0f172a;color:#fff;scroll-behavior:smooth}
+header{position:fixed;top:0;width:100%;backdrop-filter:blur(12px);background:rgba(15,23,42,.75);z-index:100}
+nav{max-width:1200px;margin:auto;padding:18px;display:flex;justify-content:space-between;align-items:center}
+.logo{font-weight:700;font-size:1.4rem}
+nav ul{display:flex;gap:24px;list-style:none}
+nav a{text-decoration:none;color:white}
+.hero{min-height:100vh;background:linear-gradient(rgba(0,0,0,.45),rgba(0,0,0,.45)),url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=80') center/cover;display:flex;align-items:center;justify-content:center;text-align:center;padding:20px}
+.hero h1{font-size:4rem}
+.hero p{margin:15px 0}
+.btn{background:#2563eb;color:white;border:none;padding:14px 24px;border-radius:10px;cursor:pointer}
+section{max-width:1200px;margin:auto;padding:80px 20px}
+h2{text-align:center;margin-bottom:30px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:25px}
+.card{background:rgba(255,255,255,.08);backdrop-filter:blur(10px);border-radius:18px;overflow:hidden;transition:.3s}
+.card:hover{transform:translateY(-8px)}
+.card img{width:100%;height:220px;object-fit:cover}
+.card h3,.card p{padding:12px}
+.form-box{background:rgba(255,255,255,.08);padding:25px;border-radius:18px}
+input,select{width:100%;padding:12px;margin:10px 0;border:none;border-radius:10px}
+.result{margin-top:15px;padding:15px;background:rgba(37,99,235,.2);border-radius:10px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:20px;text-align:center}
+.stat{background:rgba(255,255,255,.08);padding:25px;border-radius:15px}
+footer{text-align:center;padding:30px;background:#020617}
+.toggle{cursor:pointer;padding:8px 14px;border-radius:8px;background:#2563eb}
+.light{background:#f5f5f5;color:#111}
+.light header{background:rgba(255,255,255,.8)}
+.light nav a,.light .logo{color:#111}
+.light .card,.light .form-box,.light .stat{background:white;color:#111;box-shadow:0 4px 20px rgba(0,0,0,.1)}
+@media(max-width:768px){.hero h1{font-size:2.5rem}nav ul{display:none}}
+</style>
+</head>
+<body>
+<header>
+<nav>
+<div class="logo">✈ TravelPlanner Pro</div>
+<ul>
+<li><a href="#destinations">Destinations</a></li>
+<li><a href="#planner">Planner</a></li>
+<li><a href="#stats">Stats</a></li>
+</ul>
+<div class="toggle" onclick="toggleMode()">Mode</div>
+</nav>
+</header>
+
+<section class="hero">
+<div>
+<h1>Explore The World</h1>
+<p>Plan smarter, travel better, create unforgettable journeys.</p>
+<a href="#planner"><button class="btn">Start Planning</button></a>
+</div>
+</section>
+
+<section id="destinations">
+<h2>Popular Destinations</h2>
+<div class="grid">
+<div class="card"><img src="https://images.unsplash.com/photo-1537953773345-d172ccf13cf1?w=800"><h3>Bali</h3><p>Tropical paradise.</p></div>
+<div class="card"><img src="https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=800"><h3>Paris</h3><p>City of lights.</p></div>
+<div class="card"><img src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=800"><h3>Tokyo</h3><p>Future meets tradition.</p></div>
+<div class="card"><img src="https://images.unsplash.com/photo-1518684079-3c830dcef090?w=800"><h3>Dubai</h3><p>Luxury and adventure.</p></div>
+</div>
+</section>
+
+<section id="planner">
+<h2>AI Trip Planner</h2>
+<div class="form-box">
+<input id="destination" placeholder="Destination">
+<input id="days" type="number" placeholder="Trip Duration (Days)">
+<input id="budget" type="number" placeholder="Budget (₹)">
+<select id="travellers">
+<option>1 Traveller</option>
+<option>2 Travellers</option>
+<option>Family</option>
+</select>
+<button class="btn" onclick="generateTrip()">Generate Plan</button>
+<div class="result" id="output">Your itinerary will appear here.</div>
+</div>
+</section>
+
+<section id="stats">
+<h2>Travel Statistics</h2>
+<div class="stats">
+<div class="stat"><h3>50+</h3><p>Countries</p></div>
+<div class="stat"><h3>10K+</h3><p>Users</p></div>
+<div class="stat"><h3>500+</h3><p>Destinations</p></div>
+<div class="stat"><h3>25K+</h3><p>Trips Planned</p></div>
+</div>
+</section>
+
+<footer>
+<p>© 2026 TravelPlanner Pro • Designed in a single HTML file</p>
+</footer>
+
+<script>
+function generateTrip(){
+let d=document.getElementById('destination').value||'Your Destination';
+let days=document.getElementById('days').value||5;
+let budget=document.getElementById('budget').value||50000;
+document.getElementById('output').innerHTML=`
+<h3>${d} Travel Plan</h3>
+<p>Duration: ${days} Days</p>
+<p>Budget: ₹${budget}</p>
+<ul>
+<li>Day 1 - Arrival & Local Exploration</li>
+<li>Day 2 - Main Attractions</li>
+<li>Day 3 - Food & Culture Tour</li>
+<li>Day 4 - Adventure Activities</li>
+<li>Day 5 - Shopping & Departure</li>
+</ul>`;
+}
+function toggleMode(){
+document.body.classList.toggle('light');
+}
+</script>
+</body>
+</html>
